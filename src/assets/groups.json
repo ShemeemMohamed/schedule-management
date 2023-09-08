@@ -1,0 +1,230 @@
+{
+    "data": [
+        {
+            "id": "1000",
+            "code": "f230fh0g3",
+            "name": "Group 1",
+            "description": "Group 1 Description",
+            "class": [
+                {
+                    "id": "1000",
+                    "name": "Class 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Class 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Class 3"
+                }
+            ],
+            "division": [
+                {
+                    "id": "1001",
+                    "name": "Class 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Class 3"
+                }
+            ]
+        },
+        {
+            "id": "1001",
+            "code": "nvklal433",
+            "name": "Black Watch",
+            "description": "Group 1 Description",
+            "class": [
+                {
+                    "id": "1002",
+                    "name": "Class 3"
+                }
+            ],
+            "division": [
+                {
+                    "id": "1000",
+                    "name": "Division 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Division 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Division 3"
+                }
+            ]
+        },
+        {
+            "id": "1002",
+            "code": "zz21cz3c1",
+            "name": "Blue Band",
+            "description": "Product Description",
+            "class": [
+                {
+                    "id": "1000",
+                    "name": "Class 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Class 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Class 3"
+                }
+            ],
+            "division": [
+                {
+                    "id": "1000",
+                    "name": "Division 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Division 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Division 3"
+                }
+            ]
+        },
+        {
+            "id": "1003",
+            "code": "244wgerg2",
+            "name": "Blue T-Shirt",
+            "description": "Product Description",
+            "class": [
+                {
+                    "id": "1000",
+                    "name": "Class 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Class 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Class 3"
+                }
+            ],
+            "division": [
+                {
+                    "id": "1000",
+                    "name": "Division 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Division 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Division 3"
+                }
+            ]
+        },
+        {
+            "id": "1004",
+            "code": "h456wer53",
+            "name": "Bracelet",
+            "description": "Product Description",
+            "class": [
+                {
+                    "id": "1000",
+                    "name": "Class 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Class 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Class 3"
+                }
+            ],
+            "division": [
+                {
+                    "id": "1000",
+                    "name": "Division 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Division 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Division 3"
+                }
+            ]
+        },
+        {
+            "id": "1005",
+            "code": "av2231fwg",
+            "name": "Brown Purse",
+            "description": "Product Description",
+            "class": [
+                {
+                    "id": "1000",
+                    "name": "Class 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Class 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Class 3"
+                }
+            ],
+            "division": [
+                {
+                    "id": "1000",
+                    "name": "Division 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Division 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Division 3"
+                }
+            ]
+        },
+        {
+            "id": "1006",
+            "code": "bib36pfvm",
+            "name": "Chakra Bracelet",
+            "description": "Product Description",
+            "class": [
+                {
+                    "id": "1000",
+                    "name": "Class 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Class 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Class 3"
+                }
+            ],
+            "division": [
+                {
+                    "id": "1000",
+                    "name": "Division 1"
+                },
+                {
+                    "id": "1001",
+                    "name": "Division 2"
+                },
+                {
+                    "id": "1002",
+                    "name": "Division 3"
+                }
+            ]
+        }
+    ]
+}

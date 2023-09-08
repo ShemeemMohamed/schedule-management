@@ -1,0 +1,74 @@
+{
+    "data": [
+        {
+            "id": 1000,
+            "name": "test",
+            "employeeNo": 123,
+            "gender": "M",
+            "email": "test1@gamil.com",
+            "mobile": 9512345678,
+            "address": "test address 1",
+            "activeStatus": true
+        },
+        {
+            "id": 1001,
+            "name": "test1",
+            "employeeNo": 124,
+            "gender": "G",
+            "email": "test2@gamil.com",
+            "mobile": 9512345678,
+            "address": "test address 2",
+            "activeStatus": false
+        },
+        {
+            "id": 1002,
+            "name": "test2",
+            "employeeNo": 125,
+            "gender": "M",
+            "email": "test3@gamil.com",
+            "mobile": 9512345679,
+            "address": "test address 3",
+            "activeStatus": false
+        },
+        {
+            "id": 1003,
+            "name": "test3",
+            "employeeNo": 126,
+            "gender": "M",
+            "email": "test3@gamil.com",
+            "mobile": 9512345679,
+            "address": "test address 3",
+            "activeStatus": true
+        },
+        {
+            "id": 1004,
+            "name": "test4",
+            "employeeNo": 126,
+            "gender": "M",
+            "email": "test3@gamil.com",
+            "mobile": 9512345679,
+            "address": "test address 3",
+            "activeStatus": true
+        },
+        {
+            "id": 1005,
+            "name": "test5",
+            "employeeNo": 126,
+            "gender": "M",
+            "email": "test3@gamil.com",
+            "mobile": 9512345679,
+            "address": "test address 3",
+            "activeStatus": false
+        },
+        {
+            "id": 1006,
+            "name": "test6",
+            "employeeNo": 126,
+            "gender": "M",
+            "email": "test3@gamil.com",
+            "mobile": 9512345679,
+            "address": "test address 3",
+            "activeStatus": true
+        }
+    ]
+}

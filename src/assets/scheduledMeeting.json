@@ -1,0 +1,46 @@
+{
+    "data": [
+        {
+            "code": 1000,
+            "name": "meeting1",
+            "scheduledBy": "name1",
+            "scheduledOn": "30/05/2021,09:10AM"
+        },
+        {
+            "code": 1001,
+            "name": "meeting2",
+            "scheduledBy": "name2",
+            "scheduledOn": "30/05/2021,10:00AM"
+        },
+        {
+            "code": 1002,
+            "name": "meeting3",
+            "scheduledBy": "name3",
+            "scheduledOn": "30/05/2021,10:10AM"
+        },
+        {
+            "code": 1003,
+            "name": "meeting4",
+            "scheduledBy": "name4",
+            "scheduledOn": "30/05/2021,10:20AM"
+        },
+        {
+            "code": 1004,
+            "name": "meeting5",
+            "scheduledBy": "name5",
+            "scheduledOn": "30/05/2021,10:30AM"
+        },
+        {
+            "code": 1005,
+            "name": "meeting6",
+            "scheduledBy": "name6",
+            "scheduledOn": "30/05/2021,10:50AM"
+        },
+        {
+            "code": 1006,
+            "name": "meeting7",
+            "scheduledBy": "name7",
+            "scheduledOn": "30/05/2021,10:49AM"
+        }
+    ]
+}

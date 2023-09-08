@@ -1,0 +1,112 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-table
+        #dt
+        [value]="promoteStudents"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="[
+            'student',
+            'rollNumber',
+            'currentClass',
+            'division',
+            'promotedClass',
+            'status'
+        ]"
+        [rowHover]="true"
+        dataKey="rollNumber"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        editMode="row"
+        styleClass="p-datatable-responsive-demo"
+    >
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Schedules for Approvals</h5>
+            </div>
+            <div class="row">
+                <div class="p-1">
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        label="Approve"
+                        class="p-button-outlined"
+                    ></button>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="patient">
+                    Patient name<p-sortIcon field="patient"></p-sortIcon>
+                    <!-- <p-columnFilter
+                        type="text"
+                        field="student"
+                        display="menu"
+                    ></p-columnFilter> -->
+                </th>
+                <th pSortableColumn="Emirate">
+                    Emirate<p-sortIcon field="Emirate"></p-sortIcon>
+                    <!-- <p-columnFilter
+                        type="text"
+                        field="rollNumber"
+                        display="menu"
+                    ></p-columnFilter> -->
+                </th>
+                <th pSortableColumn="ContactPerson">
+                    Contact Person<p-sortIcon
+                        field="ContactPerson"
+                    ></p-sortIcon>
+                    <!-- <p-columnFilter
+                        type="text"
+                        field="currentClass"
+                        display="menu"
+                    ></p-columnFilter> -->
+                </th>
+                <th pSortableColumn="Time">
+                    Time<p-sortIcon field="Time"></p-sortIcon>
+                    <!-- <p-columnFilter
+                        type="text"
+                        field="division"
+                        display="menu"
+                    ></p-columnFilter> -->
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-promoteStudent>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="promoteStudent"></p-tableCheckbox>
+                </td>
+                <td>
+                    <span class="p-column-title"> Patient Name</span>
+                    {{ promoteStudent.Patient }}
+                </td>
+                <td>
+                    <span class="p-column-title"> Emirates</span>
+                    {{ promoteStudent.Emirate }}
+                </td>
+                <td>
+                    <span class="p-column-title">Contact Person</span>
+                    {{ promoteStudent.ContactPerson }}
+                </td>
+                <td>
+                    <span class="p-column-title">Time</span>
+                    {{ promoteStudent.Time }}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are
+                {{ promoteStudents ? promoteStudents.length : 0 }}
+                Schedules for approval.
+            </div>
+        </ng-template>
+    </p-table>
+</div>

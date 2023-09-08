@@ -1,0 +1,118 @@
+{
+    "data": [
+        {
+            "id": "1000",
+            "code": "f230fh0g3",
+            "name": "Class 1",
+            "type": 1
+        },
+        {
+            "id": "1001",
+            "code": "nvklal433",
+            "name": "Class 2",
+            "type": 1
+        },
+        {
+            "id": "1002",
+            "code": "nvklal433",
+            "name": "Class 3",
+            "type": 1
+        },
+        {
+            "id": "1003",
+            "code": "nvklal433",
+            "name": "Class 4",
+            "type": 1
+        },
+        {
+            "id": "1004",
+            "code": "nvklal433",
+            "name": "Class 5",
+            "type": 1
+        },
+        {
+            "id": "1005",
+            "code": "nvklal433",
+            "name": "Class 6",
+            "type": 1
+        },
+        {
+            "id": "1001",
+            "code": "nvklal433",
+            "name": "Division 2",
+            "type": 2
+        },
+        {
+            "id": "1003",
+            "code": "nvklal433",
+            "name": "Division 3",
+            "type": 2
+        },
+        {
+            "id": "1004",
+            "code": "nvklal433",
+            "name": "Division 4",
+            "type": 2
+        },
+        {
+            "id": "1005",
+            "code": "nvklal433",
+            "name": "Division 5",
+            "type": 2
+        },
+        {
+            "id": "1006",
+            "code": "nvklal433",
+            "name": "Division 6",
+            "type": 2
+        },
+        {
+            "id": "1000",
+            "code": "f230fh0g3",
+            "name": "Department 1",
+            "type": 3
+        },
+        {
+            "id": "1001",
+            "code": "nvklal433",
+            "name": "Department 2",
+            "type": 3
+        },
+        {
+            "id": "1002",
+            "code": "nvklal433",
+            "name": "Department 3",
+            "type": 3
+        },
+        {
+            "id": "1003",
+            "code": "nvklal433",
+            "name": "Department 4",
+            "type": 3
+        },
+        {
+            "id": "1000",
+            "code": "f230fh0g3",
+            "name": "Semester 1",
+            "type": 4
+        },
+        {
+            "id": "1001",
+            "code": "nvklal433",
+            "name": "Semester 2",
+            "type": 4
+        },
+        {
+            "id": "1002",
+            "code": "nvklal433",
+            "name": "Semester 3",
+            "type": 4
+        },
+        {
+            "id": "1003",
+            "code": "nvklal433",
+            "name": "Semester 4",
+            "type": 4
+        }
+    ]
+}

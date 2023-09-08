@@ -1,0 +1,284 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="right">
+            <button
+                pButton
+                pRipple
+                label="New"
+                icon="pi pi-plus"
+                class="p-button-success p-mr-2 mx-2"
+                (click)="openNew()"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+
+    <!-- <p-table
+        [columns]="cols"
+        [value]="groups"
+        styleClass="p-datatable-responsive-demo"
+    >
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
+                <th pSortableColumn="class">
+                    Class <p-sortIcon field="class"></p-sortIcon>
+                </th>
+                <th pSortableColumn="division">
+                    Division <p-sortIcon field="division"></p-sortIcon>
+                </th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    <span class="p-column-title">{{ col.header }}</span>
+                    {{ rowData[col.field] }}
+                </td>
+                <td>
+                    <span class="p-column-title">Class </span>
+                    {{ list2Comma(rowData.class) }}
+                </td>
+                <td>
+                    <span class="p-column-title">Division</span>
+                    {{ list2Comma(rowData.division) }}
+                </td>
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success m-2"
+                        (click)="editGroup(rowData)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-warning m-2"
+                        (click)="deleteGroup(group)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table> -->
+
+    <p-table
+        #dt
+        [value]="groups"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="[
+            'name',
+            'country.name',
+            'representative.name',
+            'status'
+        ]"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        styleClass="p-datatable-responsive-demo"
+    >
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Manage Groups</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        pInputText
+                        type="text"
+                        (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                        "
+                        placeholder="Search..."
+                    />
+                    <label for="basic" class="mR-10 ml-10">Select Date</label>
+                    <p-calendar
+                        inputId="basic"
+                        [(ngModel)]="date"
+                        [readonlyInput]="true"
+                        inputId="date"
+                        appendTo="body"
+                        [monthNavigator]="true"
+                        [yearNavigator]="true"
+                        yearRange="1950:2030"
+                    ></p-calendar>
+                    <p-dropdown
+                        [options]="searchData"
+                        [(ngModel)]="selectedSerachValue"
+                        optionLabel="text"
+                        optionValue="value"
+                        class="ml-10"
+                    ></p-dropdown>
+
+                    <button
+                        type="button"
+                        (click)="getFilteredData()"
+                        class="btn btn-info btn-Search-info"
+                    >
+                        Search
+                    </button>
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="code">
+                    Code <p-sortIcon field="code"></p-sortIcon>
+                </th>
+                <th pSortableColumn="name">
+                    Group Name <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="class">
+                    Class <p-sortIcon field="class"></p-sortIcon>
+                </th>
+                <th pSortableColumn="division">
+                    Division <p-sortIcon field="division"></p-sortIcon>
+                </th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-group>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="group"></p-tableCheckbox>
+                </td>
+                <td>
+                    <span class="p-column-title">Code</span>
+                    {{ group.code }}
+                </td>
+                <td>
+                    <span class="p-column-title">Group Name</span>
+                    {{ group.name }}
+                </td>
+                <td>
+                    <span class="p-column-title">Class</span>
+                    {{ list2Comma(group.class) }}
+                </td>
+                <td>
+                    <span class="p-column-title">Division</span>
+                    {{ list2Comma(group.division) }}
+                </td>
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success m-2"
+                        (click)="editGroup(group)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-warning m-2"
+                        (click)="deleteGroup(group)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are
+                {{ groups ? groups.length : 0 }} groups.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog
+    [(visible)]="groupDialog"
+    [style]="{width: '650px'}"
+    header="group Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="name">Name</label>
+            <input
+                type="text"
+                pInputText
+                id="name"
+                [(ngModel)]="group.name"
+                required
+                autofocus
+            />
+            <small class="p-invalid" *ngIf="submitted && !group.name"
+                >Name is required.</small
+            >
+        </div>
+        <div class="row">
+            <div class="p-field col-sm-12 col-md-6">
+                <label for="class">Class</label>
+                <p-multiSelect
+                    [options]="classes"
+                    [(ngModel)]="group.class"
+                    id="class"
+                    defaultLabel="Select  Classes"
+                    optionLabel="name"
+                    display="chip"
+                ></p-multiSelect>
+            </div>
+            <div class="p-field col-sm-12 col-md-6">
+                <label for="division">Division</label>
+                <p-multiSelect
+                    [options]="divisions"
+                    [(ngModel)]="group.division"
+                    id="division"
+                    defaultLabel="Select Divisions"
+                    optionLabel="name"
+                    display="chip"
+                ></p-multiSelect>
+            </div>
+        </div>
+        <div class="p-field">
+            <label for="description">Description</label>
+            <textarea
+                id="description"
+                pInputTextarea
+                [(ngModel)]="group.description"
+                required
+                rows="3"
+                cols="20"
+            ></textarea>
+        </div>
+        <div class="p-5">&nbsp;</div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <!-- <button
+            pButton
+            pRipple
+            label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="Save"
+            icon="pi pi-check"
+            class="p-button-text"
+            (click)="saveGroup()"
+        ></button> -->
+
+        <button type="button" (click)="hideDialog()" class="btn btn-warning">
+            Cancel
+        </button>
+        <button type="button" (click)="saveGroup()" class="btn btn-info">
+            Save
+        </button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

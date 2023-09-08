@@ -1,0 +1,130 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="right">
+            <!-- <button
+                pButton
+                pRipple
+                label="New"
+                icon="pi pi-plus"
+                class="p-button-success p-mr-2 mx-2"
+                (click)="openNew()"
+            ></button> -->
+            <!-- <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button> -->
+        </ng-template>
+    </p-toolbar>
+    <!-- <p-toast></p-toast> -->
+    <p-table
+        #dt
+        [value]="attendences"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="['name', 'email']"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        styleClass="p-datatable-responsive-demo"
+    >
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Attendence</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        pInputText
+                        type="text"
+                        (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                        "
+                        placeholder="Search..."
+                    />
+                </span>
+                <p-dropdown
+                    [options]="searchData"
+                    [(ngModel)]="selectedSerachValue"
+                    optionLabel="text"
+                    optionValue="value"
+                    class="ml-10"
+                ></p-dropdown>
+
+                <button
+                    type="button"
+                    (click)="getFilteredData()"
+                    class="btn btn-info btn-Search-info"
+                >
+                    Search
+                </button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="topic">
+                    Topic <p-sortIcon field="topic"></p-sortIcon>
+                </th>
+                <th pSortableColumn="meetingid">
+                    Meeting ID <p-sortIcon field="meetingid"></p-sortIcon>
+                </th>
+                <th pSortableColumn="usercount">
+                    User Count <p-sortIcon field="usercount"></p-sortIcon>
+                </th>
+                <th pSortableColumn="class">
+                    Class <p-sortIcon field="class"></p-sortIcon>
+                </th>
+                <th pSortableColumn="time">
+                    Time <p-sortIcon field="time"></p-sortIcon>
+                </th>
+                <th>Actions</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-attendence>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="attendence"></p-tableCheckbox>
+                </td>
+                <td>
+                    <span class="p-column-title">Topic</span>
+                    {{ attendence.topic }}
+                </td>
+                <td>
+                    <span class="p-column-title"> Meeting ID</span>
+                    {{ attendence.meetingId }}
+                </td>
+                <td>
+                    <span class="p-column-title">User Count</span>
+                    {{ attendence.userCount }}
+                </td>
+                <td>
+                    <span class="p-column-title">Class</span>
+                    {{ attendence.class }}
+                </td>
+                <td>
+                    <span class="p-column-title">Time</span>
+                    {{ attendence.time }}
+                </td>
+
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-eye"
+                        class="p-button-rounded p-button-success m-2"
+                        (click)="viewAttendence(attendence)"
+                    ></button>
+                </td>
+                <td></td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are
+                {{ attendences ? attendences.length : 0 }} records.
+            </div>
+        </ng-template>
+    </p-table>
+</div>

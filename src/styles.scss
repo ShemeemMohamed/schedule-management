@@ -1,0 +1,136 @@
+/* You can add global styles to this file, and also import other style files */
+// @import '~bootstrap/scss/bootstrap';
+
+@import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
+
+@import '~admin-lte/plugins/fontawesome-free/css/all.min.css';
+@import '~admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
+@import '~admin-lte/dist/css/adminlte.min.css';
+
+@import '~ngx-toastr/toastr';
+@import 'assets/style/custom.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+body {
+    // width: 100vw;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+.main-header {
+    z-index: 100 !important;
+}
+.auth-bg {
+    background-image: url('assets/img/school-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.login-page,
+.register-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 100px;
+    align-items: flex-start;
+}
+.p-datatable .p-datatable-tbody > tr > td {
+    padding: 0rem 1rem !important;
+}
+.p-datatable .p-datatable-thead > tr > th {
+    color: #17a2b8 !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #b6b6b6 !important;
+}
+body {
+    .ui-table {
+        .ui-table-tbody {
+            > tr {
+                background: #f0f3f5;
+            }
+
+            > tr:nth-child(even) {
+                background-color: #ffffff;
+            }
+        }
+    }
+}
+
+.card {
+    margin: 2%;
+}
+.p-datatable .p-sortable-column .p-sortable-column-icon {
+    color: #ffffff !important;
+}
+.p-datatable .p-datatable-thead > tr > th {
+    color: #ffffff !important;
+    border-bottom: 1px solid #b6b6b6 !important;
+    background: #17a2b8 !important; /* fallback for old browsers */
+}
+
+[class*='sidebar-dark-'] {
+    background: #fff; /* fallback for old browsers */
+}
+[class*='sidebar-dark-'] .sidebar a {
+    color: #6c757d !important;
+}
+[class*='sidebar-dark-'] .sidebar a:hover {
+    color: #fff !important;
+    background: #17a2b8 !important; /* fallback for old browsers */
+}
+.navbar-white {
+    background-color: #17a2b8 !important;
+    color: #fff !important;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #fff !important;
+}
+.navbar-white.navbar-light .form-control-navbar,
+.navbar-white.navbar-light
+    .form-control-navbar
+    + .input-group-append
+    > .btn-navbar {
+    background-color: #68cad9f7;
+    border-color: #68cad9f7;
+    color: #fff;
+}
+.bg-primary {
+    background: #17a2b8 !important; /* fallback for old browsers */
+}
+.layout-navbar-fixed
+    .wrapper
+    .sidebar-dark-primary
+    .brand-link:not([class*='navbar']) {
+    background-color: #17a2b8 !important;
+}
+[class*='sidebar-dark'] .user-panel {
+    border-bottom: 1px solid #e3e5e8 !important;
+}
+
+.layout-navbar-fixed .wrapper .brand-link,
+.layout-navbar-fixed .wrapper .brand-link {
+    width: 4.6rem;
+}
+.sidebar-mini.sidebar-collapse .main-sidebar.sidebar-focused .brand-link,
+.sidebar-mini.sidebar-collapse .main-sidebar:hover .brand-link {
+    width: 250px;
+}
+.sidebar-mini.sidebar-open .brand-link {
+    width: 250px !important;
+}
+.btn-Search-info {
+    padding: 0.45rem 0.75rem;
+    margin-bottom: 3px;
+    margin-left: 10px;
+}
+.ml-10 {
+    margin-left: 10px;
+}
+.mR-10 {
+    margin-right: 10px;
+}

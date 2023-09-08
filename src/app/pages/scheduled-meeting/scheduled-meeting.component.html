@@ -1,0 +1,372 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <!-- <p-table
+        [columns]="cols"
+        [value]="meetings"
+        styleClass="p-datatable-responsive-demo"
+    >
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    <span class="p-column-title">{{ col.header }}</span>
+                    {{ rowData[col.field] }}
+                </td>
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="fa fa-upload"
+                        class="p-button-rounded p-button-success m-2"
+                        (click)="upload(rowData)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-video"
+                        class="p-button-rounded p-button-warning m-2"
+                        (click)="joinMeeting(rowData)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-ban"
+                        class="p-button-rounded p-button-danger m-2"
+                        (click)="deleteMeeting(rowData)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table> -->
+
+    <p-table
+        #dt
+        [value]="meetings"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="['name']"
+        [rowHover]="true"
+        dataKey="code"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        styleClass="p-datatable-responsive-demo"
+    >
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Manage Scheduled Meetings</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        pInputText
+                        type="text"
+                        (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                        "
+                        placeholder="Search..."
+                    />
+                </span>
+
+                <label for="range" class="mR-10 ml-10">Select Date</label>
+                <p-calendar
+                    [(ngModel)]="rangeDates"
+                    selectionMode="range"
+                    [readonlyInput]="true"
+                    inputId="range"
+                    appendTo="body"
+                    [monthNavigator]="true"
+                    [yearNavigator]="true"
+                    yearRange="1950:2030"
+                >
+                </p-calendar>
+                <p-dropdown
+                    [options]="searchData"
+                    [(ngModel)]="selectedSerachValue"
+                    optionLabel="text"
+                    optionValue="value"
+                    class="ml-10"
+                ></p-dropdown>
+
+                <button
+                    type="button"
+                    (click)="getFilteredData()"
+                    class="btn btn-info btn-Search-info"
+                >
+                    Search
+                </button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="code">
+                    Meeting Code <p-sortIcon field="code"></p-sortIcon>
+                </th>
+                <th pSortableColumn="name">
+                    Meeting Name <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="scheduledby">
+                    Scheduled By <p-sortIcon field="scheduledby"></p-sortIcon>
+                </th>
+                <th pSortableColumn="scheduledOn">
+                    Scheduled On <p-sortIcon field="scheduledOn"></p-sortIcon>
+                </th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-meeting>
+            <tr>
+                <td>
+                    <span class="p-column-title">Meeting Code</span>
+                    {{ meeting.code }}
+                </td>
+                <td>
+                    <span class="p-column-title">Meeting Name</span>
+                    {{ meeting.name }}
+                </td>
+                <td>
+                    <span class="p-column-title">Scheduled By</span>
+                    {{ meeting.scheduledBy }}
+                </td>
+                <td>
+                    <span class="p-column-title"> Scheduled On</span>
+                    {{ meeting.scheduledOn }}
+                </td>
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="fa fa-upload"
+                        class="p-button-rounded p-button-success m-2"
+                        (click)="upload(meeting)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-video"
+                        class="p-button-rounded p-button-warning m-2"
+                        (click)="joinMeeting(meeting)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-ban"
+                        class="p-button-rounded p-button-danger m-2"
+                        (click)="deleteMeeting(meeting)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are
+                {{ meetings ? meetings.length : 0 }} meetings.
+            </div>
+        </ng-template>
+    </p-table>
+    -->
+</div>
+
+<p-dialog
+    [(visible)]="meetingDialog"
+    [style]="{width: '600px'}"
+    header="Meeting Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <div class="clearfix mb-2"></div>
+        <div class="p-field col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="code">Meeting Code</label>
+                </div>
+                <div class="col-md-8">
+                    <label for="code">{{ meeting.code }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+        <div class="col-md-12 p-field">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="name">Meeting Name</label>
+                </div>
+                <div class="col-md-8">
+                    <label for="name">{{ meeting.name }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+        <div class="col-md-12 p-field">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="name">Scheduled By</label>
+                </div>
+                <div class="col-md-8">
+                    <label for="name">{{ meeting.scheduledBy }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+        <div class="col-md-12 p-field">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="name">Scheduled On</label>
+                </div>
+                <div class="col-md-8">
+                    <label for="name">{{ meeting.scheduledOn }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+    </ng-template>
+
+    <!-- <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="Save"
+            icon="pi pi-check"
+            class="p-button-text"
+            (click)="saveMeeting()"
+        ></button>
+    </ng-template> -->
+</p-dialog>
+<p-dialog
+    [(visible)]="meetingSaveDialog"
+    [style]="{width: '600px'}"
+    header="Meeting Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <div class="clearfix mb-2"></div>
+        <div class="p-field col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="code">Meeting Code</label>
+                </div>
+                <div class="col-md-8">
+                    <input
+                        type="text"
+                        pInputText
+                        id="code"
+                        [(ngModel)]="meeting.code"
+                        required
+                        autofocus
+                    />
+                    <small class="p-error" *ngIf="submitted && !meeting.code"
+                        >Meeting code is required.</small
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+        <div class="col-md-12 p-field">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="name">Meeting Name</label>
+                </div>
+                <div class="col-md-8">
+                    <input
+                        type="text"
+                        pInputText
+                        id="name"
+                        [(ngModel)]="meeting.name"
+                        required
+                        autofocus
+                    />
+                    <small class="p-error" *ngIf="submitted && !meeting.name"
+                        >Meeting name is required.</small
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+        <div class="col-md-12 p-field">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="name">Scheduled By</label>
+                </div>
+                <div class="col-md-8">
+                    <input
+                        type="text"
+                        pInputText
+                        id="schedeledby"
+                        [(ngModel)]="meeting.scheduledBy"
+                        required
+                        autofocus
+                    />
+                    <small
+                        class="p-error"
+                        *ngIf="submitted && !meeting.scheduledBy"
+                        >Scheduler name is required.</small
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+        <div class="col-md-12 p-field">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="name">Scheduled On</label>
+                </div>
+                <div class="col-md-8">
+                    <p-calendar
+                        [(ngModel)]="meeting.scheduledOn"
+                        required
+                        autofocus
+                        inputId="scheduledon"
+                        [showIcon]="true"
+                        appendTo="body"
+                        [monthNavigator]="true"
+                        [yearNavigator]="true"
+                        yearRange="1950:2030"
+                    ></p-calendar>
+                    <small
+                        class="p-error"
+                        *ngIf="submitted && !meeting.scheduledOn"
+                        >Scheduled date is required.</small
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="Save"
+            icon="pi pi-check"
+            class="p-button-text"
+            (click)="saveMeeting()"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

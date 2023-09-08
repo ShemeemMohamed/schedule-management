@@ -1,0 +1,30 @@
+<div class="login-page">
+    <div class="login-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <span class="h1"><b>Kariox</b></span>
+            </div>
+            <div class="card-body text-center">
+                <p class="login-box-msg">Select the student</p>
+                <div class="mb-3">
+                    <p-dropdown
+                        [options]="students"
+                        [(ngModel)]="selectedStudent"
+                        required
+                        placeholder="Select a Student"
+                        optionLabel="name"
+                        [showClear]="true"
+                    ></p-dropdown>
+                </div>
+                <p-button
+                    label="Go"
+                    [disabled]="!selectedStudent"
+                    (click)="submit()"
+                    icon="pi pi-forward"
+                    iconPos="right"
+                ></p-button>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+</div>

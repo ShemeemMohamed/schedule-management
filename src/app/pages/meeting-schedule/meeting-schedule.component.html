@@ -1,0 +1,140 @@
+<p-toast></p-toast>
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Schedule a Meeting</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+
+<div class="">
+    <div class="card">
+        <div class="card-body">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col">
+                    <label for="title">Title</label>
+                    <input id="title" type="text" pInputText />
+                </div>
+
+                <div class="row mt-2">
+                    <div class="p-field col-md-3 col-12">
+                        <label for="room">Patient</label>
+                        <p-dropdown
+                            [options]="students"
+                            [(ngModel)]="selectedStudents"
+                            optionLabel="name"
+                        ></p-dropdown>
+                    </div>
+                    <div class="p-field col-md-9 col-12">
+                        <label for="PatientPreference"
+                            >Patient Preference</label
+                        >
+                        <input id="PatientPreference" type="text" pInputText />
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="p-field col-md-3 col-12">
+                        <label for="Address">Address</label>
+                        <input id="Address" type="text" pInputText />
+                    </div>
+                    <div class="p-field col-md-3 col-12">
+                        <label for="to">Contact Person</label>
+                        <p-dropdown
+                            [options]="students"
+                            [(ngModel)]="selectedStudents"
+                            optionLabel="name"
+                        ></p-dropdown>
+                    </div>
+                    <div class="p-field col-md-3 col-12">
+                        <label for="to">Emirates</label>
+                        <p-dropdown
+                            [options]="emirates"
+                            [(ngModel)]="selectedStudents"
+                            optionLabel="name"
+                        ></p-dropdown>
+                    </div>
+                    <div class="p-field col-md-3 col-12">
+                        <label for="to">Axios Van</label>
+                        <p-dropdown
+                            [options]="axiosVan"
+                            [(ngModel)]="selectedStudents"
+                            optionLabel="name"
+                        ></p-dropdown>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="p-field col-md-3 col-12">
+                        <label for="starttime">Start Time</label>
+                        <p-calendar
+                            [(ngModel)]="dateFrom"
+                            [showTime]="true"
+                            [showIcon]="true"
+                            inputId="icon"
+                            appendTo="body"
+                            [monthNavigator]="true"
+                            [yearNavigator]="true"
+                            yearRange="1950:2030"
+                        >
+                        </p-calendar>
+                    </div>
+                    <div class="p-field col-md-3 col-12">
+                        <label for="endtime">End Time</label>
+                        <p-calendar
+                            [(ngModel)]="dateTo"
+                            [showTime]="true"
+                            [showIcon]="true"
+                            inputId="icon"
+                            appendTo="body"
+                            [monthNavigator]="true"
+                            [yearNavigator]="true"
+                            yearRange="1950:2030"
+                        >
+                        </p-calendar>
+                    </div>
+                    <div class="p-field col-md-6 col-12">
+                        <label for="days">Recurrence Days</label>
+                        <p-multiSelect
+                            [options]="weekDays"
+                            [(ngModel)]="selectedWeekdays"
+                            optionLabel="name"
+                        >
+                        </p-multiSelect>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="p-field col-12">
+                        <label for="description">Description</label>
+                        <p-editor
+                            [(ngModel)]="text"
+                            [style]="{height: '200px'}"
+                            ngDefaultControl
+                            placeholder="enter your text here"
+                        >
+                        </p-editor>
+                    </div>
+                </div>
+                <div class="row mt-5 text-center">
+                    <!-- <button style="width: 100px" pButton pRipple type="button" class="p-button-rounded" label="Submit"
+                        (click)="saveMeeting()"></button> -->
+
+                    <button
+                        type="button"
+                        (click)="saveMeeting()"
+                        class="btn btn-info"
+                    >
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

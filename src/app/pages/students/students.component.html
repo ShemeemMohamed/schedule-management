@@ -1,0 +1,456 @@
+<p-toast></p-toast>
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="right">
+            <button
+                pButton
+                pRipple
+                label="New"
+                icon="pi pi-plus"
+                class="p-button-success p-mr-2 mx-2"
+                (click)="openNew()"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="students"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="[
+            'name',
+            'class.name',
+            'department.name',
+            'semester.name',
+            'division.name',
+            'rollNumber'
+        ]"
+        [rowHover]="true"
+        dataKey="registerNumber"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        styleClass="p-datatable-responsive-demo"
+    >
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Manage Students</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        pInputText
+                        type="text"
+                        (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                        "
+                        placeholder="Search..."
+                    />
+                </span>
+                <p-dropdown
+                    [options]="searchData"
+                    [(ngModel)]="selectedSerachValue"
+                    optionLabel="text"
+                    optionValue="value"
+                    class="ml-10"
+                ></p-dropdown>
+                <button
+                    type="button"
+                    (click)="getFilteredData()"
+                    class="btn btn-info btn-Search-info"
+                >
+                    Search
+                </button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="name">
+                    Name <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="rollNumber">
+                    Roll Number <p-sortIcon field="rollNumber"></p-sortIcon>
+                </th>
+                <th pSortableColumn="department">
+                    Department <p-sortIcon field="department"></p-sortIcon>
+                </th>
+                <th pSortableColumn="class">
+                    Class <p-sortIcon field="class"></p-sortIcon>
+                </th>
+                <th pSortableColumn="semester">
+                    Semester <p-sortIcon field="semester"></p-sortIcon>
+                </th>
+                <th pSortableColumn="division">
+                    Division <p-sortIcon field="division"></p-sortIcon>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-student>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="student"></p-tableCheckbox>
+                </td>
+                <td>
+                    <span class="p-column-title">Name</span>
+                    {{ student.name }}
+                </td>
+                <td>
+                    <span class="p-column-title">Roll Number</span>
+                    {{ student.rollNumber }}
+                </td>
+                <td>
+                    <span class="p-column-title">Department</span>
+                    {{ student.department.name }}
+                </td>
+                <td>
+                    <span class="p-column-title">Class</span>
+                    {{ student.class.name }}
+                </td>
+                <td>
+                    <span class="p-column-title">Semester</span>
+                    {{ student.semester.name }}
+                </td>
+                <td>
+                    <span class="p-column-title">Division</span>
+                    {{ student.division.name }}
+                </td>
+                <td>
+                    <!-- <span class="p-column-title">Actions</span> -->
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success m-2"
+                        (click)="editStudent(student)"
+                    ></button>
+                    <p-toggleButton
+                        onIcon="{{ onicon }}"
+                        offIcon="{{ oficon }}"
+                        iconPos="left"
+                        [(ngModel)]="student.activeStatus"
+                        (onChange)="deleteStudent(student, $event)"
+                        [style]="{margin: '8px'}"
+                    >
+                    </p-toggleButton>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are
+                {{ students ? students.length : 0 }} students.
+            </div>
+        </ng-template>
+    </p-table>
+
+    <!-- <p-table
+        [columns]="cols"
+        [value]="students"
+        styleClass="p-datatable-responsive-demo"
+    >
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    <span class="p-column-title">{{ col.header }}</span>
+                    {{ rowData[col.field] }}
+                </td>
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success m-2"
+                        (click)="editStudent(rowData)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-warning m-2"
+                        (click)="deleteStudent(rowData)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table> -->
+</div>
+
+<p-dialog
+    [(visible)]="studentDialog"
+    [style]="{width: '850px'}"
+    header="Student Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="p-field col-md-6 col-12">
+                <label for="rollNumber">Roll Number</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="rollNumber"
+                    [(ngModel)]="student.rollNumber"
+                    autofocus
+                />
+            </div>
+
+            <div class="p-field col-md-6 col-12">
+                <label for="registerNumber">Register Number</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="registerNumber"
+                    [(ngModel)]="student.registerNumber"
+                    autofocus
+                />
+            </div>
+        </div>
+
+        <div class="p-field">
+            <label for="name">Name</label>
+            <input
+                type="text"
+                pInputText
+                id="name"
+                [(ngModel)]="student.name"
+                required
+                autofocus
+            />
+            <small class="p-invalid" *ngIf="submitted && !student.name"
+                >Name is required.</small
+            >
+        </div>
+
+        <div class="row">
+            <div class="p-field col-md-6 col-12">
+                <label class="p-mb-3">Gender</label>
+                <div class="p-formgrid p-grid row">
+                    <div class="p-field-radiobutton p-col-6">
+                        <p-radioButton
+                            id="gender1"
+                            name="gender"
+                            value="Male"
+                            [(ngModel)]="student.gender"
+                        >
+                        </p-radioButton>
+                        <label for="gender1">Male</label>
+                    </div>
+                    <div class="p-field-radiobutton p-col-6">
+                        <p-radioButton
+                            id="gender2"
+                            name="gender"
+                            value="Female"
+                            [(ngModel)]="student.gender"
+                        >
+                        </p-radioButton>
+                        <label for="gender2">Female</label>
+                    </div>
+                </div>
+            </div>
+            <div class="p-field col-md-6 col-12">
+                <label for="dob">Date of Birth</label>
+                <p-calendar
+                    style="height: 100px"
+                    id="dob"
+                    [(ngModel)]="student.dob"
+                    [showIcon]="true"
+                    inputId="icon"
+                    [monthNavigator]="true"
+                    [yearNavigator]="true"
+                    yearRange="1950:2030"
+                    appendTo="body"
+                >
+                </p-calendar>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="p-field col-md-6 col-12">
+                <label for="email">E Mail</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="email"
+                    [(ngModel)]="student.email"
+                    autofocus
+                />
+            </div>
+
+            <div class="p-field col-md-6 col-12">
+                <label for="mobile">Mobile</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="mobile"
+                    [(ngModel)]="student.mobile"
+                    autofocus
+                />
+            </div>
+        </div>
+
+        <div class="p-field">
+            <label for="address">Address</label>
+            <textarea
+                id="address"
+                pInputTextarea
+                rows="3"
+                cols="20"
+                [(ngModel)]="student.address"
+                autofocus
+                autoResize="autoResize"
+            ></textarea>
+        </div>
+
+        <div class="row">
+            <div class="p-field col-md-6 col-12">
+                <label for="class">Class</label>
+                <p-dropdown
+                    [options]="classes"
+                    [(ngModel)]="selectedClass"
+                    optionLabel="name"
+                    [filter]="true"
+                    filterBy="name"
+                    [showClear]="true"
+                    placeholder="Select a Class"
+                >
+                    <ng-template pTemplate="selectedItem">
+                        <div
+                            class="country-item country-item-value"
+                            *ngIf="selectedClass"
+                        >
+                            <div>{{ selectedClass.name }}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-class pTemplate="item">
+                        <div class="country-item">
+                            <div>{{ class.name }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+
+            <div class="p-field col-md-6 col-12">
+                <label for="division">Division</label>
+                <p-dropdown
+                    [options]="divisions"
+                    [(ngModel)]="selectedDivision"
+                    optionLabel="name"
+                    [filter]="true"
+                    filterBy="name"
+                    [showClear]="true"
+                    placeholder="Select a Division"
+                >
+                    <ng-template pTemplate="selectedItem">
+                        <div
+                            class="country-item country-item-value"
+                            *ngIf="selectedDivision"
+                        >
+                            <div>{{ selectedDivision.name }}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-class pTemplate="item">
+                        <div class="country-item">
+                            <div>{{ class.name }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="p-field col-md-6 col-12">
+                <label for="department">Department</label>
+                <p-dropdown
+                    [options]="departments"
+                    [(ngModel)]="selectedDepartment"
+                    optionLabel="name"
+                    [filter]="true"
+                    filterBy="name"
+                    [showClear]="true"
+                    placeholder="Select a Department"
+                >
+                    <ng-template pTemplate="selectedItem">
+                        <div
+                            class="country-item country-item-value"
+                            *ngIf="selectedDepartment"
+                        >
+                            <div>{{ selectedDepartment.name }}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-class pTemplate="item">
+                        <div class="country-item">
+                            <div>{{ class.name }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+
+            <div class="p-field col-md-6 col-12">
+                <label for="semester">Semester</label>
+                <p-dropdown
+                    [options]="semesters"
+                    [(ngModel)]="selectedSemester"
+                    optionLabel="name"
+                    [filter]="true"
+                    filterBy="name"
+                    [showClear]="true"
+                    placeholder="Select a Semester"
+                >
+                    <ng-template pTemplate="selectedItem">
+                        <div
+                            class="country-item country-item-value"
+                            *ngIf="selectedSemester"
+                        >
+                            <div>{{ selectedSemester.name }}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-class pTemplate="item">
+                        <div class="country-item">
+                            <div>{{ class.name }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <!-- <button
+            pButton
+            pRipple
+            label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="Save"
+            icon="pi pi-check"
+            class="p-button-text"
+            (click)="saveStudent()"
+        ></button> -->
+
+        <button type="button" (click)="hideDialog()" class="btn btn-warning">
+            Cancel
+        </button>
+        <button type="button" (click)="saveStudent()" class="btn btn-info">
+            Save
+        </button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

@@ -1,0 +1,264 @@
+<p-toast></p-toast>
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="right">
+            <button
+                pButton
+                pRipple
+                label="New"
+                icon="pi pi-plus"
+                class="p-button-success p-mr-2 mx-2"
+                (click)="openNew()"
+            ></button>
+            <!-- <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button> -->
+        </ng-template>
+
+        <!-- <ng-template pTemplate="right">
+            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
+            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+        </ng-template> -->
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="recordings"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="['name']"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        styleClass="p-datatable-responsive-demo"
+    >
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Manage Recordings</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        pInputText
+                        type="text"
+                        (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                        "
+                        placeholder="Search..."
+                    />
+                </span>
+                <label for="range" class="mR-10 ml-10">Select Date</label>
+                <p-calendar
+                    [(ngModel)]="rangeDates"
+                    selectionMode="range"
+                    [readonlyInput]="true"
+                    inputId="range"
+                    appendTo="body"
+                    [monthNavigator]="true"
+                    [yearNavigator]="true"
+                    yearRange="1950:2030"
+                >
+                </p-calendar>
+                <p-dropdown
+                    [options]="searchData"
+                    [(ngModel)]="selectedSerachValue"
+                    optionLabel="text"
+                    optionValue="value"
+                    class="ml-10"
+                ></p-dropdown>
+
+                <button
+                    type="button"
+                    (click)="getFilteredData()"
+                    class="btn btn-info btn-Search-info"
+                >
+                    Search
+                </button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="name">
+                    Record Name <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="type">
+                    Record Type <p-sortIcon field="type"></p-sortIcon>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-record>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="record"></p-tableCheckbox>
+                </td>
+                <td>
+                    <span class="p-column-title">Record Name</span>
+                    {{ record.name }}
+                </td>
+                <td>
+                    <span class="p-column-title">Record Type</span>
+                    {{ record.type }}
+                </td>
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-eye"
+                        class="p-button-rounded p-button-success m-2"
+                        (click)="viewRecord(record)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-calendar-plus"
+                        class="p-button-rounded p-button-warning m-2"
+                        (click)="downloadRecord(record)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are
+                {{ recordings ? recordings.length : 0 }} recordings.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog
+    [(visible)]="recodingDialog"
+    [style]="{width: '600px'}"
+    header="Meeting Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <div class="clearfix mb-2"></div>
+        <div class="p-field col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="name">Record name</label>
+                </div>
+                <div class="col-md-8">
+                    <label for="name">{{ recording.name }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+        <div class="col-md-12 p-field">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="type">Record Type</label>
+                </div>
+                <div class="col-md-8">
+                    <label for="type">{{ recording.type }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+    </ng-template>
+
+    <!-- <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="Save"
+            icon="pi pi-check"
+            class="p-button-text"
+            (click)="saveMeeting()"
+        ></button>
+    </ng-template> -->
+</p-dialog>
+<p-dialog
+    [(visible)]="recordSaveDialog"
+    [style]="{width: '600px'}"
+    header="Meeting Details"
+    [modal]="true"
+    styleClass="p-fluid"
+    height="600px"
+>
+    <ng-template pTemplate="content">
+        <div class="clearfix mb-2"></div>
+        <div class="p-field col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="code">Record name</label>
+                </div>
+                <div class="col-md-8">
+                    <input
+                        type="text"
+                        pInputText
+                        id="code"
+                        [(ngModel)]="recording.name"
+                        required
+                        autofocus
+                    />
+                    <small class="p-error" *ngIf="submitted && !recording.name"
+                        >Record name required.</small
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+        <div class="col-md-12 p-field">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="name">Record Type</label>
+                </div>
+                <div class="col-md-8">
+                    <p-dropdown
+                        [options]="type"
+                        [(ngModel)]="selectedType"
+                        placeholder="Select a type"
+                        optionLabel="name"
+                        optionValue="code"
+                        [showClear]="true"
+                    ></p-dropdown>
+                    <small class="p-error" *ngIf="submitted && !recording.type"
+                        >Record type is required.</small
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-2"></div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <!-- <button
+            pButton
+            pRipple
+            label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="Save"
+            icon="pi pi-check"
+            class="p-button-text"
+            (click)="saveMeeting()"
+        ></button> -->
+
+        <button type="button" (click)="hideDialog()" class="btn btn-warning">
+            Cancel
+        </button>
+        <button type="button" (click)="saveMeeting()" class="btn btn-info">
+            Save
+        </button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

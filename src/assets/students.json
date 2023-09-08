@@ -1,0 +1,249 @@
+{
+    "data": [
+        {
+            "name": "John Doe",
+            "rollNumber": "001",
+            "registerNumber": "ST001",
+            "gender": "Male",
+            "dob": "01/01/2000",
+            "email": "johndoe@sample.com",
+            "mobile": "9876543210",
+            "address": "abc street",
+            "activeStatus": true,
+            "class": {
+                "id": "1000",
+                "code": "f230fh0g3",
+                "name": "Class 1",
+                "type": 1
+            },
+            "division": {
+                "id": "1001",
+                "code": "nvklal433",
+                "name": "Division 2",
+                "type": 2
+            },
+            "department": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Department 3",
+                "type": 3
+            },
+            "semester": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Semester 3",
+                "type": 4
+            }
+        },
+        {
+            "name": "Chandler Bing",
+            "rollNumber": "002",
+            "registerNumber": "ST002",
+            "gender": "Male",
+            "dob": "02/01/2000",
+            "email": "bing@sample.com",
+            "mobile": "9638527410",
+            "address": "central perk street",
+            "activeStatus": false,
+            "class": {
+                "id": "1000",
+                "code": "f230fh0g3",
+                "name": "Class 2",
+                "type": 1
+            },
+            "division": {
+                "id": "1001",
+                "code": "nvklal433",
+                "name": "Division 3",
+                "type": 2
+            },
+            "department": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Department 2",
+                "type": 3
+            },
+            "semester": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Semester 1",
+                "type": 4
+            }
+        },
+        {
+            "name": "Ros Geller",
+            "rollNumber": "003",
+            "registerNumber": "ST003",
+            "gender": "Male",
+            "dob": "03/01/2000",
+            "email": "ros@sample.com",
+            "mobile": "9852637410",
+            "address": "2b perk street",
+            "activeStatus": true,
+            "class": {
+                "id": "1000",
+                "code": "f230fh0g3",
+                "name": "Class 3",
+                "type": 1
+            },
+            "division": {
+                "id": "1001",
+                "code": "nvklal433",
+                "name": "Division 3",
+                "type": 2
+            },
+            "department": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Department 3",
+                "type": 3
+            },
+            "semester": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Semester 3",
+                "type": 4
+            }
+        },
+        {
+            "name": "Monica Geller",
+            "rollNumber": "004",
+            "registerNumber": "ST004",
+            "gender": "Female",
+            "dob": "04/01/2000",
+            "email": "monica@sample.com",
+            "mobile": "9865321470",
+            "address": "2b perk street",
+            "activeStatus": true,
+            "class": {
+                "id": "1000",
+                "code": "f230fh0g3",
+                "name": "Class 4",
+                "type": 1
+            },
+            "division": {
+                "id": "1001",
+                "code": "nvklal433",
+                "name": "Division 4",
+                "type": 2
+            },
+            "department": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Department 4",
+                "type": 3
+            },
+            "semester": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Semester 4",
+                "type": 4
+            }
+        },
+        {
+            "name": "Rachel Green",
+            "rollNumber": "005",
+            "registerNumber": "ST005",
+            "gender": "Female",
+            "dob": "05/01/2000",
+            "email": "rachel@sample.com",
+            "mobile": "7418529630",
+            "address": "5d oakland street",
+            "activeStatus": true,
+            "class": {
+                "id": "1000",
+                "code": "f230fh0g3",
+                "name": "Class 5",
+                "type": 1
+            },
+            "division": {
+                "id": "1001",
+                "code": "nvklal433",
+                "name": "Division 5",
+                "type": 2
+            },
+            "department": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Department 5",
+                "type": 3
+            },
+            "semester": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Semester 5",
+                "type": 4
+            }
+        },
+        {
+            "name": "Phoebe Buffay",
+            "rollNumber": "006",
+            "registerNumber": "ST006",
+            "gender": "Female",
+            "dob": "06/01/2000",
+            "email": "phoebe@sample.com",
+            "mobile": "8529637410",
+            "address": "Indiana  street",
+            "activeStatus": true,
+            "class": {
+                "id": "1000",
+                "code": "f230fh0g3",
+                "name": "Class 1",
+                "type": 1
+            },
+            "division": {
+                "id": "1001",
+                "code": "nvklal433",
+                "name": "Division 1",
+                "type": 2
+            },
+            "department": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Department 1",
+                "type": 3
+            },
+            "semester": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Semester 1",
+                "type": 4
+            }
+        },
+        {
+            "name": "Joey Tribbiany",
+            "rollNumber": "007",
+            "registerNumber": "ST007",
+            "gender": "Male",
+            "dob": "07/01/2000",
+            "email": "joey@sample.com",
+            "mobile": "7418529631",
+            "address": "Arizona street",
+            "activeStatus": true,
+            "class": {
+                "id": "1000",
+                "code": "f230fh0g3",
+                "name": "Class 1",
+                "type": 1
+            },
+            "division": {
+                "id": "1001",
+                "code": "nvklal433",
+                "name": "Division 2",
+                "type": 2
+            },
+            "department": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Department 2",
+                "type": 3
+            },
+            "semester": {
+                "id": "1002",
+                "code": "nvklal433",
+                "name": "Semester 2",
+                "type": 4
+            }
+        }
+    ]
+}

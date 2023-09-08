@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "id": 1000,
+            "rollNo": 1,
+            "name": "stud1",
+            "joinedTime": "10:02:10 AM",
+            "leftTime": "11:02:10 AM",
+            "ip": "192.168.1.1"
+        },
+        {
+            "id": 1001,
+            "rollNo": 2,
+            "name": "stud2",
+            "joinedTime": "10:02:10 AM",
+            "leftTime": "11:02:10 AM",
+            "ip": "192.168.1.2"
+        },
+        {
+            "id": 1002,
+            "rollNo": 2,
+            "name": "stud3",
+            "joinedTime": "10:02:10 AM",
+            "leftTime": "11:02:10 AM",
+            "ip": "192.168.1.3"
+        }
+    ]
+}
